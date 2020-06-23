@@ -1,0 +1,9 @@
+Notes :
+1.  Data to be used is :
+Train::
+Monday data of the April Week3
+Test::
+Tuesday of the same user group and the same week
+
+See original paper (UGR'16). Select data time span with attacks.
+See file : ugr16_ip_list.txt
