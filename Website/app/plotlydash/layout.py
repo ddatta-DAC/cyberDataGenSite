@@ -9,20 +9,23 @@ html_layout = '''
             {%favicon%}
             {%css%}
         </head>
-        <body class="dash-template">
-            <header>
-              <div class="navbar navbar-expand-lg navbar-light bg-light">
-                <a href="/">
-                    <h1>Visualization Dashboard</h1>
-                  </a>
-                <nav>
-                 <a href="/index">
-                    <h1>Home</h1>
-                  </a>
-                </nav>
+        
+        <body >
+         
+        <nav class="navbar navbar-expand-lg light bg-light">
+            <div class="d-flex align-content-around flex-wrap">
+                <div class=" align-self-start h3" >
+                   <a class="nav-item nav-link" href="/home">Home</a>
+                </div>
+                <div  class="align-self-end h1">
+                 <a class="nav-item nav-link" href="/dashapp">Visualization Dashboard</a>
+                </div>
+        
             </div>
-            </header>
+            </nav>   
+            <div class=" mr-3  container-fluid ">
             {%app_entry%}
+            </div>
             <footer>
                 {%config%}
                 {%scripts%}
