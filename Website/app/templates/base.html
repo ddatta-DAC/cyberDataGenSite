@@ -3,7 +3,7 @@
 {% block styles %}
 {{super()}}
 <link rel="stylesheet"
-      href="{{url_for('.static', filename='bootstrap.min.css')}}">
+      href="{{url_for('.static', filename='bootstrap_lux.min.css')}}">
 {% endblock %}
 
 {% block title %}
@@ -11,19 +11,20 @@
 {% endblock %}
 
 {% block navbar %}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+    <nav class="navbar navbar-expand-lg light bg-light">
 
-        <div class="row">
-        <div class="col-xl h3" >
+    <div class="d-flex align-content-around flex-wrap">
+        <div class=" align-self-start h1" >
            <a class="nav-item nav-link" href="#">Home</a>
         </div>
-        <div class="col-xl h3">
+        <div  class="align-self-end h3">
          <a class="nav-item nav-link" href="#">Visualize Time Series</a>
         </div>
-        <div class="col-xl h3">
+        <div  class="align-self-end h3">
           <a class="nav-item nav-link" href="#">Visualize Data Stats</a>
         </div>
-         </div>
+    </div>
+
     </nav>
 {% endblock %}
 

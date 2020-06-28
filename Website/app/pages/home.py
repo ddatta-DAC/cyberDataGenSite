@@ -8,4 +8,4 @@ def render():
         'value_1' : 'A',
         'value_2': 'B'
     }
-    return render_template('index.html', **_dict)
+    return render_template('homepage.html', **_dict)
