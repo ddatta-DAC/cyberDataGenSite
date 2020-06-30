@@ -5,7 +5,7 @@ dependencies:
   - _libgcc_mutex=0.1=main
   - blas=1.0=mkl
   - brotlipy=0.7.0=py37h7b6447c_1000
-  - ca-certificates=2020.1.1=0
+  - ca-certificates=2020.6.24=0
   - certifi=2020.6.20=py37_0
   - cffi=1.14.0=py37he30daa8_1
   - click=7.1.2=py_0
@@ -50,7 +50,7 @@ dependencies:
   - pandas=1.0.4=py37h0573a6f_0
   - pcre=8.43=he6710b0_0
   - pip=20.1.1=py37_1
-  - plotly=4.8.1=py_0
+  - plotly=4.8.2=py_0
   - pycparser=2.20=py_0
   - pyparsing=2.4.7=py_0
   - pyqt=5.9.2=py37h05f1152_2
@@ -84,11 +84,13 @@ dependencies:
     - dash-html-components==1.0.3
     - dash-renderer==1.5.1
     - dash-table==4.8.1
+    - dill==0.3.2
     - dominate==2.5.1
     - flask-assets==2.0
     - flask-bootstrap==3.3.7.1
     - flask-navigation==0.2.0
     - joblib==0.15.1
+    - pandarallel==1.4.8
     - patsy==0.5.1
     - python-dotenv==0.13.0
     - scikit-learn==0.23.1
