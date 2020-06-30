@@ -135,15 +135,17 @@ def get_cat_plot(df, columns):
         color_continuous_scale=px.colors.sequential.Pinkyl
     )
     fig.update_layout(
-        autosize=True,
-        margin=dict(l=50, r=50, t=40, b=40),
-        paper_bgcolor="#f5f4f2",
+        autosize=False,
+        margin=dict(l=150, r=100, t=40, b=40),
+
+        paper_bgcolor="#ffffff",
         font=dict(
             family="Courier New",
-            size=18,
+            size=15,
             color="#7f7f7f"
         ),
-        title_text=''
+        title_text='',
+        legend_orientation="h"
     )
     return fig
 
@@ -197,14 +199,15 @@ def get_TS_fig(df, x_value='TS', y_value='Packets', group_by='Protocol'):
 
 
 def modify_ports(df, port_columns):
+    df = df.copy()
     def aux(val):
         val = int(val)
         if val <= 1023:
             return val
         if val <= 49151:
-            return "Registered Port"
+            return "Reg. Port"
         else:
-            return "Dynamic Port"
+            return "Dynamic"
 
     for pc in port_columns:
         df[pc] = df[pc].parallel_apply(aux)
@@ -220,9 +223,9 @@ def get_viz_tab_1(data):
     # 1. Source Port to Destination Port
     # ===================================
     # Group ports
-    df_port_modified = modify_ports(df, port_columns=['Source Port', 'Destination Port'])
+    df_port_modified = modify_ports( df, port_columns=['Source Port', 'Destination Port'])
     columns = ['Source Port', 'Destination Port']
-    fig = get_cat_plot(df, columns)
+    fig = get_cat_plot(df_port_modified, columns)
     tab_1 = dcc.Tab(
         label='Port Communication',
         children=[html.Div(dcc.Graph(figure=fig), className='d-flex justify-content-center')]
@@ -242,6 +245,21 @@ def get_viz_tab_1(data):
         label='Time duration of connections',
         children=[get_violin_plot_div(data)]
     )
+    tab_4 = dcc.Tab(
+        label='# of Packets',
+        children=[get_violin_plot_div(data, y_column='Packets')]
+    )
+    tab_5 = dcc.Tab(
+        label='# of Bytes',
+        children=[get_violin_plot_div(data, y_column='Bytes')]
+    )
     tab_list.append(tab_3)
+    tab_list.append(tab_4)
+    tab_list.append(tab_5)
     tab_container = dcc.Tabs(tab_list)
+    tab_container = html.Div(
+        tab_container,
+        id="viz_tabs",
+        className="mx-auto"
+    )
     return tab_container
