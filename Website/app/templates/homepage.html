@@ -50,10 +50,18 @@ Analysis application: analyzes received flow data in the context of intrusion de
 <br>
 <hr>
 <br>
+
 <div class = "footer container flex-wrap align-items-center p-4 t-4">
     <div class="row  justify-space-between align-items-center">
-        <div class="col"><b><a href="#">Discovery Analytics Center</a></b></div>
-        <div class="col"> <b><a href="#">Virginia Tech</a></b></div>
+        <div class="col">
+            <img class = "footer_icon img-fluid img-thumbnail"
+            src="{{url_for('static', filename='/assets/DAC_logo.png')}}" align="middle" />
+            Discovery Analytics Center
+        </div>
+        <div class="col">      <img class = "footer_icon img-fluid img-thumbnail"
+            src="{{url_for('static', filename='/assets/VT_logo.png')}}" align="middle" />
+            Virginia Tech
+        </div>
     </div>
 </div>
 {% endblock %}

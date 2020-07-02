@@ -11,3 +11,6 @@ font-size: 1.35rem !important;
 .footer{
 font-size: 2.05rem !important;
 }
+.footer_icon{
+max-height: 75px;
+}
