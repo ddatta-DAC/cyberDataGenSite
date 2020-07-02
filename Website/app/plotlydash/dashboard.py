@@ -19,8 +19,10 @@ import dash_core_components as dcc
 from .data import create_dataframe
 from .layout import html_layout
 import plotly.express as px
-
-
+try:
+    from .import plotly_fig_utils as plotly_utils
+except:
+    import plotly_fig_utils as plotly_utils
 # =================================
 # Main function
 # =================================
@@ -49,8 +51,8 @@ def create_dashboard(server):
     # ========================================
 
     tab_obj = get_viz_tab_1(data)
-    time_series_Packets = get_TS_fig(data)
-    time_series_Bytes = get_TS_fig(data, y_value='Bytes')
+    time_series_Packets = get_TS_fig(figure_id=1, df = data, y_value='Packets')
+    time_series_Bytes = get_TS_fig(figure_id=2, df = data, y_value='Bytes')
     # ========================================
     # Create a visualization tab
     # ========================================
@@ -176,32 +178,37 @@ def get_violin_plot_div(df, y_column='Time Duration', x_col='Protocol'):
 # ===============================
 # Time Serioes plot
 # ===============================
-def get_TS_fig(df, x_value='TS', y_value='Packets', group_by='Protocol'):
-    df = df.copy()
-    fig = px.line(df, x=x_value, y=y_value, color=group_by)
-    fig.update_xaxes(
-        rangeslider_visible=True,
-         rangeselector=dict(
-             buttons=list([
-                 dict(count=3, label="3h", step="hour", stepmode="backward"),
-                 dict(count=6, label="6h", step="hour", stepmode="backward"),
-                 dict(count=12, label="12h", step="hour", stepmode="backward"),
-                 dict(count=1, label="1d", step="day", stepmode="backward"),
-                 dict(count=1, label="TD", step="day", stepmode="todate"),
-                 dict(step="all")
-             ])
-         )
-    )
-    fig.update_layout(
-        font=dict(
-            family="Courier New",
-            size=12,
-            color="#7f7f7f"
-        ),
-        title_text=y_value)
+def get_TS_fig(figure_id, df, x_value='TS', y_value='Packets', group_by='Protocol' ):
+    fig = plotly_utils.fetch_figure(figure_id)
+
+    if fig is None:
+        print('Figure not saved', file=sys.stdout)
+        df = df.copy()
+        fig = px.line(df, x=x_value, y=y_value, color=group_by)
+        fig.update_xaxes(
+            rangeslider_visible=True,
+             rangeselector=dict(
+                 buttons=list([
+                     dict(count=3, label="3h", step="hour", stepmode="backward"),
+                     dict(count=6, label="6h", step="hour", stepmode="backward"),
+                     dict(count=12, label="12h", step="hour", stepmode="backward"),
+                     dict(count=1, label="1d", step="day", stepmode="backward"),
+                     dict(count=1, label="TD", step="day", stepmode="todate"),
+                     dict(step="all")
+                 ])
+             )
+        )
+        fig.update_layout(
+            font=dict(
+                family="Courier New",
+                size=12,
+                color="#7f7f7f"
+            ),
+            title_text=y_value)
+        plotly_utils.save_figure(fig, figure_name=figure_id)
+
     time_series_viz = dcc.Graph(figure=fig)
     time_series_div = html.Div(
-
         time_series_viz,
         className='container-fluid justify-content-center'
     )
