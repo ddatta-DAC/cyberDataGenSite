@@ -32,16 +32,17 @@ def create_dashboard(server):
         external_stylesheets=[
             '/static/bootstrap_lux.min.css',
             dbc.themes.BOOTSTRAP,
-            dbc.themes.LUX
-        ]
+            dbc.themes.LUX,
+            '/static/dashapp_1.css',
+        ],
+        assets_folder='/static/assets'
+
     )
 
     # Load DataFrame
     data = fetch_network_data_v1()
     # Custom HTML layout
     dash_app.index_string = html_layout
-
-    # histogram_1 = get_histogram(data)
 
     # ========================================
     # Create a Time series plot
@@ -65,6 +66,7 @@ def create_dashboard(server):
         id='dash-container',
         className="container-fluid mr-4"
     )
+
     return dash_app.server
 
 
@@ -82,7 +84,15 @@ def create_data_table(df):
     )
     table = html.Div(
         table,
-        className=' border border-100'
+        className='border border-100'
+    )
+    header = html.Div(
+        html.P('Data Table'),
+        className="text-center h3"
+    )
+    table = html.Div(
+        [header,table],
+        className="dash_table text-center"
     )
     return table
 

@@ -1,29 +1,40 @@
 {% extends 'bootstrap/base.html' %}
-
+{% block html_attribs %} lang="en"{% endblock %}
 {% block styles %}
 {{super()}}
 <link rel="stylesheet"
-      href="{{url_for('.static', filename='bootstrap_lux.min.css')}}">
+      href="{{url_for('static', filename='bootstrap_lux.min.css')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='homepage.css') }}">
+<link rel="shortcut icon" href="{{ url_for('static', filename='/assets/DAC_logo.png') }}">
+
 {% endblock %}
 
 {% block title %}
     {% if title %}{{ title }} {% else %}Virginia Tech{% endif %}
 {% endblock %}
-
 {% block navbar %}
-    <nav class="navbar navbar-expand-lg light bg-light">
+<nav class="navbar fixed-top navbar-light bg-light">
+        <div class="flex-grow-1 d-flex">
+            <div class="d-flex">
+                <div class="d-flex " >
+                   <a class="nav-item nav-link h2" href="/home">Home</a>
+                </div>
+                <div  class="d-flex justify-content-end">
+                    <a class="nav-item nav-link h2" href="/dashapp">Visualization Dashboard</a>
+                </div>
+            </div>
+            <div class="d-flex ml-auto">
+                <span class="navbar-brand" href="#">
+                    <img src="/static/assets/DAC_logo.png"
+                         width="30" height="30"
+                         class="d-inline-block"
+                         alt="Virginia Tech">
+                </span>
+            </div>
+        </div>
+</nav>
 
-    <div class="d-flex align-content-around flex-wrap">
-        <div class=" align-self-start h1" >
-           <a class="nav-item nav-link" href="/home">Home</a>
-        </div>
-        <div  class="align-self-end h2">
-            <a class="nav-item nav-link" href="/dashapp">Visualization Dashboard</a>
-        </div>
-    </div>
-    </nav>
 {% endblock %}
-
 {% block content %}
 
     <div class="jumbotron jumbotron-fluid">
@@ -40,4 +51,6 @@
     <div class="container">
 
     </div>
+{% endblock %}
+{% block footer %}
 {% endblock %}
