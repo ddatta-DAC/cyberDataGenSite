@@ -1,0 +1,13 @@
+body {
+margin :7.5%;
+}
+.jumbotron p{
+font-size: 1.35rem !important;
+}
+
+.container p {
+font-size: 1.35rem !important;
+}
+.footer{
+font-size: 2.05rem !important;
+}

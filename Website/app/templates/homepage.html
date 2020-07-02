@@ -6,22 +6,19 @@ Homepage
 
 {% block content %}
 
-
-<!--{{ value_1 }}-->
-<!--{{ value_2 }}-->
-    <div class="jumbotron">
+     <div class="jumbotron">
       <div class="container ">
-        <h3 class="display-4  align-items-center">Project statement</h3>
-        <p class = "display-4">What is Cybersecurity?</p>
-        <p class="lead m-4">
+        <h3 class="display-4 align-items-center">Project statement</h3>
+        <p class = "lead">What is Cybersecurity?</p>
+        <p class="m-4">
             Cybersecurity is the art of protecting networks, devices, and data from unauthorized access or criminal use and the practice of ensuring confidentiality, integrity, and availability of information.
         </p>
-        <p class = "display-4">Why is Cybersecurity important?</p>
-        <p class="lead m-4">
+        <p class = "lead">Why is Cybersecurity important?</p>
+        <p class="m-4">
             Cybersecurity is a key concern not only for computer scientists, but also for professionals from all relevant disciplines. Lack of cybersecurity can affect businesses, state governments, and even national security. We are enduring the prevalence of cyber-threats and attacks. Cyberattacks are considered a threat against critical infrastructure sectors, and malicious cyber-activity has cost the US economy $57 to $109 billion in 2016.
         </p>     
-        <p class = "display-4">What we can do with deep learning for cybersecurity?</p>
-	    <p class="lead m-4">
+        <p class = "lead">What we can do with deep learning for cybersecurity?</p>
+	    <p class="m-4">
 		    Network traffic content is generated rapidly with tremendous volume, which makes human annotation not possible. A more feasible solution is to develop algorithms to inspect the network traffic. But there is a concern of violating privacy for organizations to share real-life data for the training of algorithms. Therefore, to achieve training data for classification of network traffic, we propose to utilize generative adversarial networks (GAN) for generating synthetic cybersecurity data.
         </p>
       </div>
@@ -29,7 +26,7 @@ Homepage
 
     <div class = "container  align-items-center p-4 t-4">
         <p class = "display-4 m-4">What is NetFlow ?</p>
-    <p class = "m-4">
+        <p class = "m-4">
         NetFlow is a feature that was introduced on Cisco routers around
         1996 that provides the ability to collect IP network traffic as
         it enters or exits an interface. By analyzing the data provided by NetFlow, a network administrator can determine things such as the source and destination of traffic, class of service, and the causes of congestion. A typical flow monitoring setup (using NetFlow) consists of three main components:
@@ -47,4 +44,10 @@ Analysis application: analyzes received flow data in the context of intrusion de
     />
 
     </div>
+<div class = "footer container flex-wrap align-items-center p-4 t-4">
+    <div class="row  justify-space-between align-items-center">
+        <div class="col"><b><a href="#">Discovery Analytics Center</a></b></div>
+        <div class="col"> <b><a href="#">Virginia Tech</a></b></div>
+    </div>
+</div>
 {% endblock %}
