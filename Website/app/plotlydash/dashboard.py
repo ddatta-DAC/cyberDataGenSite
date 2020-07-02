@@ -34,7 +34,9 @@ def create_dashboard(server):
             dbc.themes.BOOTSTRAP,
             dbc.themes.LUX,
             '/static/dashapp_1.css',
-        ]
+        ],
+        assets_folder='/static/assets'
+
     )
 
     # Load DataFrame
@@ -64,6 +66,7 @@ def create_dashboard(server):
         id='dash-container',
         className="container-fluid mr-4"
     )
+
     return dash_app.server
 
 

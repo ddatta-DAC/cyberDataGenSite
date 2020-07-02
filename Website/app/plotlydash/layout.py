@@ -7,6 +7,7 @@ html_layout = '''
             {%metas%}
             <title>{%title%}</title>
             {%favicon%}
+            <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
             {%css%}
         </head>
         
