@@ -86,13 +86,15 @@ def create_dashboard(server):
     # ========================================
     # Create a visualization tab
     # ========================================
-    data = read_data(_size=10000)
-    tab_obj = get_viz_tab_1(data)
-
+    tab_obj_1 = get_viz_tab_1(_type='background')
+    tab_obj_2 = get_viz_tab_1(_type='sshscan')
+    tab_obj_3 = get_viz_tab_1(_type='spam')
     dash_app.layout = html.Div(
         children=[
             TimeSeries_tab_container,
-            tab_obj,
+            tab_obj_1,
+            tab_obj_2,
+            tab_obj_3,
             create_data_table(_type='background'),
             create_data_table(_type='sshscan'),
             create_data_table(_type='spam')
@@ -112,7 +114,9 @@ def read_data(
         pass
     import glob
 
-    files = list(glob.glob( os.path.join( DATA_LOC, _type + '**','**.csv') )) + glob.glob( os.path.join( DATA_LOC, _type + '**.csv'))
+    files = list(glob.glob( os.path.join( DATA_LOC, _type + '**','**.csv') ))
+    files += list(glob.glob( os.path.join( DATA_LOC, _type + '*.csv')))
+
     df = None
 
     for file in sorted(files):
@@ -423,19 +427,17 @@ def modify_ports(df, port_columns):
 # Create tabbed entries
 # The design is hardcoded
 # =======================================
-def get_viz_tab_1(data):
+def get_viz_tab_1(_type='background'):
 
-    df = data.copy()
+    data = read_data(_type, _size=10000)
     # List to store each Tab specific data in the  Tabs container
     tab_list = []
-    # ===================================
-    # 1. Source Port to Destination Port
-    # ===================================
+
 
     # =====
     # 2. Source Port to Destination Port
     # =====
-    fig = get_pie_chart(df, column='Protocol')
+    fig = get_pie_chart(data, column='Protocol')
     tab_2 = dcc.Tab(
         label='Protocol Distribution',
         children=[html.Div(dcc.Graph(figure=fig), className='d-flex justify-content-center')]
@@ -453,13 +455,21 @@ def get_viz_tab_1(data):
         label='# of Bytes',
         children=[get_violin_plot_div(data, y_column='Bytes')]
     )
+    # ===================================
+    # 1. Source Port to Destination Port
+    # ===================================
     # Group ports
-    df_port_modified = modify_ports(df, port_columns=['Source Port', 'Destination Port'])
-    columns = ['Source Port', 'Destination Port']
-    fig = get_cat_plot(df_port_modified, columns)
+    figure_id = 'source_dest_port_'+_type
+    fig_obj = plotly_utils.fetch_figure(figure_id)
+    if fig_obj is None:
+        df_port_modified = modify_ports(data, port_columns=['Source Port', 'Destination Port'])
+        columns = ['Source Port', 'Destination Port']
+        fig_obj = get_cat_plot(df_port_modified, columns)
+        plotly_utils.save_figure(fig_obj,figure_id)
+
     tab_1 = dcc.Tab(
         label='Port Communication',
-        children=[html.Div(dcc.Graph(figure=fig), className='d-flex justify-content-center')]
+        children=[html.Div(dcc.Graph(figure=fig_obj), className='d-flex justify-content-center')]
     )
 
     tab_list.append(tab_3)
@@ -468,12 +478,23 @@ def get_viz_tab_1(data):
     tab_list.append(tab_2)
     tab_list.append(tab_1)
 
+    header_label = ' Data Statistics :: ' + get_display_string(_type)
+    header = html.Div(
+        html.P(header_label),
+        className="text-center h3"
+    )
+
     tab_container = dcc.Tabs(tab_list)
     tab_container = html.Div(
         tab_container,
-        id="viz_tabs",
+        id="viz_tabs_"+_type,
         className="mx-auto"
     )
+    tab_container = html.Div(
+        [html.Hr(), header, tab_container],
+        className="dash_table text-center"
+    )
+
     return tab_container
 
 
