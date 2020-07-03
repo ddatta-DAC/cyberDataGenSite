@@ -63,14 +63,18 @@ Homepage
     <div class = "container  align-items-center p-4 t-4">
         <p class = "display-4 m-4">What is NetFlow ?</p>
         <p class = "m-4">
-        NetFlow is a feature that was introduced on Cisco routers around
-        1996 that provides the ability to collect IP network traffic as
-        it enters or exits an interface. By analyzing the data provided by NetFlow, a network administrator can determine things such as the source and destination of traffic, class of service, and the causes of congestion. A typical flow monitoring setup (using NetFlow) consists of three main components:
-        [1]
-Flow exporter: aggregates packets into flows and exports flow records towards one or more flow collectors.
-Flow collector: responsible for reception, storage and pre-processing of flow data received from a flow exporter.
-Analysis application: analyzes received flow data in the context of intrusion detection or traffic profiling, for example.
-	</p>
+        NetFlow, a.k.a. network traffic flow, is a feature that was introduced on Cisco routers around 1996 that provides the ability to collect IP network traffic as it enters or exits an interface. 
+	By analyzing the data provided by NetFlow, a network administrator can determine things such as the source and destination of traffic, class of service, and the causes of congestion. 
+	</br>A typical flow monitoring setup (using NetFlow) consists of three main components:</p>
+        <ul>
+		<li><p class = "m-4"> Flow exporter: aggregates packets into flows and exports flow records towards one or more flow collectors.</p></li>
+		<li><p class = "m-4"> Flow collector: responsible for reception, storage and pre-processing of flow data received from a flow exporter.</p></li>
+		<li><p class = "m-4">Analysis application: analyzes received flow data in the context of intrusion detection or traffic profiling, for example.</p></li>
+	</ul>
+	<p class = "m-4">
+	Cisco standard NetFlow version 5 defines a flow as a unidirectional sequence of packets that all share seven values: Ingress interface (SNMP ifIndex), Source IP address,
+	Destination IP address, IP protocol, Source port for UDP or TCP (0 for other protocols), Destination port for UDP or TCP, type and code for ICMP (or 0 for other protocols),
+	and IP Type of Service. </p>
 	</div>
 <br>
     <div class="container" style="max-width=70%">
@@ -82,7 +86,7 @@ Analysis application: analyzes received flow data in the context of intrusion de
     <div class = "container  align-items-center p-4 t-4">
         <p class = "display-4 m-4">What is UGR 16 ?</p>
         <p class = "m-4">
-       		UGR 16 is a dataset for the evaluation of cyclostationarity-based network IDSs. The dataset is built with real traffic and up-to-date attacks. 
+       		UGR 16 is a Netflow dataset for the evaluation of cyclostationarity-based network IDSs. The dataset is built with real traffic and up-to-date attacks. 
 		These data come from several netflow v9 collectors strategically located in the network of a Spanish ISP. It is composed of two differentiated sets of data that are previously split in weeks:
 	</p>
 	<ul>
