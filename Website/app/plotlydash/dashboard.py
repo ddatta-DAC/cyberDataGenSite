@@ -19,10 +19,13 @@ import dash_core_components as dcc
 from .data import create_dataframe
 from .layout import html_layout
 import plotly.express as px
+
 try:
-    from .import plotly_fig_utils as plotly_utils
+    from . import plotly_fig_utils as plotly_utils
 except:
     import plotly_fig_utils as plotly_utils
+
+
 # =================================
 # Main function
 # =================================
@@ -51,13 +54,13 @@ def create_dashboard(server):
     # ========================================
 
     tab_obj = get_viz_tab_1(data)
-    time_series_Packets = get_TS_fig(figure_id=1, df = data, y_value='Packets')
-    time_series_Bytes = get_TS_fig(figure_id=2, df = data, y_value='Bytes')
+    time_series_Packets = get_TS_fig(figure_id=1, df=data, y_value='Packets')
+    time_series_Bytes = get_TS_fig(figure_id=2, df=data, y_value='Bytes')
     # ========================================
     # Create a visualization tab
     # ========================================
 
-    # Create Layout
+
     dash_app.layout = html.Div(
         children=[
             time_series_Packets,
@@ -73,7 +76,22 @@ def create_dashboard(server):
 
 
 def create_data_table(df):
-    """Create Dash datatable from Pandas DataFrame."""
+    """
+    Create Dash datatable from Pandas DataFrame.
+    """
+    columns = [
+        'TimeStamp',
+        'Source Address',
+        'Source Port',
+        'Destination Port',
+        'Destination Address',
+        'Protocol',
+        'Bytes',
+        'Packets',
+        'Time Duration',
+        'Label'
+    ]
+    df = df[columns]
     table = dash_table.DataTable(
         id='database-table',
         columns=[{"name": i, "id": i} for i in df.columns],
@@ -81,8 +99,28 @@ def create_data_table(df):
         sort_action="native",
         sort_mode='native',
         page_size=25,
+        style_table={'height': '300px', 'overflowY': 'auto','overflowX': 'auto'},
         style_data={'border': '1px solid blue'},
-        style_header = {'border': '2px solid green', 'fontsize' : '2rem'}
+        fixed_rows={'headers': True},
+        style_header={
+            'border': '2px solid',
+            'fontsize': '2.5rem',
+            'backgroundColor': 'rgb(1, 36, 34)',
+            'color': 'rgb(255, 255, 255)'
+        },
+        style_cell={
+            'minWidth': 50, 'maxWidth': 55, 'width': 52
+        },
+        style_data_conditional=[
+            {
+                'if': {
+                    'filter_query': '{Label} = background',
+                    'column_id': 'Label'
+                },
+                'backgroundColor': 'green',
+                'color': 'white'
+            }
+        ]
     )
     table = html.Div(
         table,
@@ -93,14 +131,13 @@ def create_data_table(df):
         className="text-center h3"
     )
     table = html.Div(
-        [header,table],
+        [header, table],
         className="dash_table text-center"
     )
     return table
 
 
 def fetch_network_data_v1():
-    print(os.getcwd())
     DATA_LOC = './../data/Processed/data_2016-04-12.csv'
     df = pd.read_csv(DATA_LOC, index_col=None)
     df = df.rename(columns={
@@ -109,7 +146,11 @@ def fetch_network_data_v1():
         'pr': 'Protocol',
         'byt': 'Bytes',
         'pkt': 'Packets',
-        'td': 'Time Duration'
+        'td': 'Time Duration',
+        'TS': 'TimeStamp',
+        'sa': 'Source Address',
+        'da': 'Destination Address',
+        'label' : 'Label'
     })
     return df
 
@@ -176,27 +217,26 @@ def get_violin_plot_div(df, y_column='Time Duration', x_col='Protocol'):
 
 
 # ===============================
-# Time Serioes plot
+# Time Series plot
 # ===============================
-def get_TS_fig(figure_id, df, x_value='TS', y_value='Packets', group_by='Protocol' ):
+def get_TS_fig(figure_id, df, x_value='TS', y_value='Packets', group_by='Protocol'):
     fig = plotly_utils.fetch_figure(figure_id)
-
     if fig is None:
         print('Figure not saved', file=sys.stdout)
         df = df.copy()
         fig = px.line(df, x=x_value, y=y_value, color=group_by)
         fig.update_xaxes(
             rangeslider_visible=True,
-             rangeselector=dict(
-                 buttons=list([
-                     dict(count=3, label="3h", step="hour", stepmode="backward"),
-                     dict(count=6, label="6h", step="hour", stepmode="backward"),
-                     dict(count=12, label="12h", step="hour", stepmode="backward"),
-                     dict(count=1, label="1d", step="day", stepmode="backward"),
-                     dict(count=1, label="TD", step="day", stepmode="todate"),
-                     dict(step="all")
-                 ])
-             )
+            rangeselector=dict(
+                buttons=list([
+                    dict(count=3, label="3h", step="hour", stepmode="backward"),
+                    dict(count=6, label="6h", step="hour", stepmode="backward"),
+                    dict(count=12, label="12h", step="hour", stepmode="backward"),
+                    dict(count=1, label="1d", step="day", stepmode="backward"),
+                    dict(count=1, label="TD", step="day", stepmode="todate"),
+                    dict(step="all")
+                ])
+            )
         )
         fig.update_layout(
             font=dict(
@@ -215,8 +255,12 @@ def get_TS_fig(figure_id, df, x_value='TS', y_value='Packets', group_by='Protoco
     return time_series_div
 
 
+# =======================
+# An utility function
+# =======================
 def modify_ports(df, port_columns):
     df = df.copy()
+
     def aux(val):
         val = int(val)
         if val <= 1023:
@@ -228,10 +272,14 @@ def modify_ports(df, port_columns):
 
     for pc in port_columns:
         df[pc] = df[pc].parallel_apply(aux)
-    df = df.sort_values(by=port_columns, ascending = True)
+    df = df.sort_values(by=port_columns, ascending=True)
     return df
 
 
+# =======================================
+# Create tabbed entries
+# The design is hardcoded
+# =======================================
 def get_viz_tab_1(data):
     df = data.copy()
     # List to store each Tab specific data in the  Tabs container
@@ -240,7 +288,7 @@ def get_viz_tab_1(data):
     # 1. Source Port to Destination Port
     # ===================================
     # Group ports
-    df_port_modified = modify_ports( df, port_columns=['Source Port', 'Destination Port'])
+    df_port_modified = modify_ports(df, port_columns=['Source Port', 'Destination Port'])
     columns = ['Source Port', 'Destination Port']
     fig = get_cat_plot(df_port_modified, columns)
     tab_1 = dcc.Tab(
