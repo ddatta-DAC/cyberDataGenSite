@@ -24,18 +24,37 @@ Homepage
 		But there is a concern of violating privacy for organizations to share real-life data for the training of algorithms. Therefore, to achieve training data for classification of network traffic, 
 		we propose to utilize generative models such as GAN for generating synthetic cybersecurity data. 
 	</p>
-	<p class = "lead">What we do to generate synthetic data?</p>
+	<p class = "lead">What we have done to generate synthetic data?</p>
 	<ul>
 		<li><p class = "m-4">     
 	      	We designed and prototyped ANDS, a novel tool that learns joint distribution of multivariate time-series data for netflows, and then generates synthetic data from the learned distribution. 
-	      	</p>
+	      	</p></li>
 		<li><p class = "m-4">     
 	      	We evaluate ANDS on real publicly available network traffic data, and compare with baselines.
-		</p>
+		</p></li>
 		<li><p class = "m-4">     
 	      	We consider two cybersecurity machine learning tasks and show that while using only ANDS generated data to train the models, the performance of the models is comparable to using real data.
-		</p>	
+		</p></li>	
 	</ul>
+	<h3 class="display-4 align-items-center">Research Questions</h3>
+	<ul>
+		<li><p class = "m-4">     
+	      	Evaluation Metrics for the synthetic data quality is still an open and important question in the deep generative model research community.
+		Unlike images or human languages, many data format are not easy to be judged by human’s eyes, such as network traffic data.
+		So how should we define "like real" in network traffic data? 
+		</p></li>
+		<li><p class = "m-4">     
+	      	There are various existing evaluation metrics, either Quantitative & Qualitative, which includes likelihood, KL-divergence, distribution plots, diversity. 
+		Then we have domain-knowledge rule check, and we can also train a ML task to compare the performance. 
+		Can we have a general metrics across all synthetic data model? Should it be implicit density, tractable density, approximate density, or a mixture of these?
+		</p></li>
+		<li><p class = "m-4">     
+	      	We’ve worked on the network traffic flow data which is only one case in the cybersecurity area. 
+		There can be more professional security data synthesis, such as in web request, url, packages, and even cyber-physical system or human-related insider threat.
+		Or we can create more realistic application, to apply the techniques with the real company dataset, 
+		and then synthetic such data that can solve large scale, publicly reproducible, and industry-concerned problems
+		</p></li> 	
+	</ul>    
       </div>
     </div>
 <br>
