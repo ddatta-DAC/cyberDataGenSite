@@ -62,7 +62,7 @@ def create_dashboard(server):
     fig_idx = 1
 
     for _type,_label  in time_series_tab_dict.items():
-        data = read_data(_type,_size=5000)
+        data = read_data(_type)
         time_series_count = get_TS_fig_v2(figure_id=fig_idx, df=data, group_by='Protocol')
         fig_idx += 1
         # time_series_Bytes = get_TS_fig(figure_id=fig_idx, df=data, y_value='Bytes')
