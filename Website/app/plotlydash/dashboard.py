@@ -4,6 +4,7 @@ import pandas as pd
 import os
 import sys
 from pandarallel import pandarallel
+from dash.dependencies import Input, Output, State
 
 pandarallel.initialize()
 
@@ -40,12 +41,11 @@ def create_dashboard(server):
             dbc.themes.LUX,
             '/static/dashapp_1.css',
         ],
-        assets_folder='/static/assets'
+        assets_folder='/static/assets',
+        external_scripts=['/static/js/jquery-3.5.1.min.js','/static/js/dashapp_1.js']
 
     )
 
-    # Load DataFrame
-    data = read_data(_size=10000)
     # Custom HTML layout
     dash_app.index_string = html_layout
 
@@ -59,14 +59,28 @@ def create_dashboard(server):
         'sshscan' : 'SSH Scan Netflows',
         'spam'  : 'Spam Attack Netflows '
     }
-    fig_idx = 1
 
-    for _type,_label  in time_series_tab_dict.items():
+    ts_header_str = 'Time Series Visualization'
+    ts_header = html.Div(
+        children=ts_header_str,
+        className='header text-center h3'
+    )
+    ts_data_str = "Time Series visualization of network flow helps understand the volume, frequency and velocity of traffic. " \
+                " The X axis shows the time line of traffic and Y-axis shows the number of unidirectional network flows. " \
+                " The 3 protocols that are present are TCP (Tranfer Control Protocol), UDP (User Datagram Protocol) and ICMP (Internet Control Message Protocol)."
+
+    ts_preamble =  html.Div(
+        html.P(children=ts_data_str),
+        className='preamble',
+        id="ts_header_desc"
+    )
+
+    fig_idx = 1
+    for _type,_label in time_series_tab_dict.items():
         data = read_data(_type)
         time_series_count = get_TS_fig_v2(figure_id=fig_idx, df=data, group_by='Protocol')
         fig_idx += 1
-        # time_series_Bytes = get_TS_fig(figure_id=fig_idx, df=data, y_value='Bytes')
-        # fig_idx += 1
+
         tab_element = dcc.Tab(
             label= _label,
             children=[
@@ -75,13 +89,25 @@ def create_dashboard(server):
         )
         tab_list.append(tab_element)
 
-
+    ts_header_div = html.Div([ts_header, ts_preamble])
     tab_container = dcc.Tabs(tab_list)
+
+
     TimeSeries_tab_container = html.Div(
-        tab_container,
+        [ts_header_div, tab_container],
         id="ts_tabs",
         className="mx-auto"
     )
+
+    data_stats_str = "SSH stands for Secure Socket Shell." \
+                     " SSH Scan attacks are brute force attacks where attackers try to guess the victims credentials. It is a brute force attack." \
+                     " Spam is any kind of unwanted, unsolicited digital communication that gets sent out in bulk." \
+                     " Spam attacks are include sttacks such as phising and SMTP email attacks." \
+                     " Data statistics can help understand the characteristics of flow traffic. " \
+                     " Traffic patterns pertaining to attacks have signatures which need to be understood to help in detecting such attacks."
+
+    data_stats_preamble = html.Div(html.P(children=data_stats_str), className='preamble')
+
 
     # ========================================
     # Create a visualization tab
@@ -91,7 +117,10 @@ def create_dashboard(server):
     tab_obj_3 = get_viz_tab_1(_type='spam')
     dash_app.layout = html.Div(
         children=[
+
             TimeSeries_tab_container,
+            html.Hr(),
+            data_stats_preamble,
             tab_obj_1,
             tab_obj_2,
             tab_obj_3,
@@ -102,12 +131,17 @@ def create_dashboard(server):
         id='dash-container',
         className="container-fluid mr-4"
     )
+    # ===========
+    #
+    # ============
+
+
 
     return dash_app.server
 
 def read_data(
         _type = 'background',
-        _size = 100000
+        _size = 1000
 ):
     DATA_LOC = './../data/Processed'
     if type is None:
@@ -396,8 +430,9 @@ def get_TS_fig_v2(figure_id, df, x_value='TimeStamp',  group_by='Protocol'):
         plotly_utils.save_figure(fig, figure_name=figure_id)
 
     time_series_viz = dcc.Graph(figure=fig)
-    time_series_div = html.Div(
-        time_series_viz,
+
+    time_series_div = html.Div([
+        time_series_viz],
         className='container-fluid justify-content-center'
     )
     return time_series_div
@@ -429,7 +464,7 @@ def modify_ports(df, port_columns):
 # =======================================
 def get_viz_tab_1(_type='background'):
 
-    data = read_data(_type, _size=10000)
+    data = read_data(_type, _size=100)
     # List to store each Tab specific data in the  Tabs container
     tab_list = []
 

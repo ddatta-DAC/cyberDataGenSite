@@ -8,36 +8,42 @@ Homepage
 
      <div class="jumbotron">
       <div class="container ">
-        <h3 class="display-4 align-items-center">Project statement</h3>
-        <p class = "lead">What is Cybersecurity?</p>
+        <div class="d-inline-flex  text-white">
+			<div>
+				<img
+				class = "round-small-thumbnail"
+				src="{{url_for('static', filename='assets/cybersecurity_icon.png')}}" align="middle"  style="border-radius: 50%"
+    		/>
+			</div>
+			<div>
+				 <h3 class="display-4 align-items-center">Background</h3>
+			</div>
+		</div>
+		<p class = "lead h4">What is Cybersecurity?</p>
         <p class="m-4">
         	Cybersecurity is the art of protecting networks, devices, and data from unauthorized access or criminal use and the practice of ensuring confidentiality, integrity, and availability of information.
         </p>
-        <p class = "lead">Why is Cybersecurity important?</p>
+        <p class = "lead h4">Why is Cybersecurity important?</p>
         <p class="m-4">
         	Cybersecurity is a key concern not only for computer scientists, but also for professionals from all relevant disciplines. Lack of cybersecurity can affect businesses, state governments, and even national security.
 		We are enduring the prevalence of cyber-threats and attacks. Cyberattacks are considered a threat against critical infrastructure sectors, and malicious cyber-activity has cost the US economy $57 to $109 billion in 2016.
         </p>     
-        <p class = "lead">What can we do with deep learning for cybersecurity?</p>
+        <p class = "lead h4">What can we do with Machine  Learning for cybersecurity?</p>
 	<p class="m-4">
 		Network traffic content is generated rapidly with tremendous volume, which makes human annotation not possible. A more feasible solution is to develop algorithms to inspect the network traffic. 
 		But there is a concern of violating privacy for organizations to share real-life data for the training of algorithms. Therefore, to achieve training data for classification of network traffic, 
 		we propose to utilize generative models such as GAN for generating synthetic cybersecurity data. 
 	</p>
-	<p class = "lead">What we have done to generate synthetic data?</p>
+
+	<h3 class="display-4 align-items-center">Objectives & Research Questions</h3>
 	<ul>
-		<li><p class = "m-4">     
-	      	We designed and prototyped ANDS, a novel tool that learns joint distribution of multivariate time-series data for netflows, and then generates synthetic data from the learned distribution. 
-	      	</p></li>
-		<li><p class = "m-4">     
-	      	We evaluate ANDS on real publicly available network traffic data, and compare with baselines.
+		<li><p class = "m-4">
+	      	The core objective is to develop a framework and algorithm that can generate symthetic netflow data that can be utilized in Machine Learning algorithms for cybersecurity.
 		</p></li>
-		<li><p class = "m-4">     
-	      	We consider two cybersecurity machine learning tasks and show that while using only ANDS generated data to train the models, the performance of the models is comparable to using real data.
-		</p></li>	
-	</ul>
-	<h3 class="display-4 align-items-center">Research Questions</h3>
-	<ul>
+		<li><p class = "m-4">
+	      	Perform Explorator Data Analysis on real and generated data to understand how cyber attacks take place and what factors in data indicate such attacks.
+		</p></li>
+
 		<li><p class = "m-4">     
 	      	Evaluation Metrics for the synthetic data quality is still an open and important question in the deep generative model research community.
 		Unlike images or human languages, many data format are not easy to be judged by human’s eyes, such as network traffic data.
@@ -54,8 +60,26 @@ Homepage
 		Or we can create more realistic application, to apply the techniques with the real company dataset, 
 		and then synthetic such data that can solve large scale, publicly reproducible, and industry-concerned problems
 		</p></li> 	
-	</ul>    
+		</ul>
       </div>
+		 <div>
+		  <p class = "lead h4">How do we propose to generate synthetic data?</p>
+			 <p>
+			 <ul>
+				<li><p class = "m-4">
+					We designed and prototyped ANDS, a novel tool that learns joint distribution of multivariate time-series data for netflows, and then generates synthetic data from the learned distribution.
+					</p></li>
+				<li><p class = "m-4">
+					We evaluate ANDS on real publicly available network traffic data, and compare with baselines.
+				</p></li>
+				<li><p class = "m-4">
+					We consider two cybersecurity machine learning tasks and show that while using only ANDS generated data to train the models, the performance of the models is comparable to using real data.
+				</p></li>
+			</ul>
+		 </p>
+
+	 </div>
+
     </div>
 <br>
 <hr>
@@ -84,7 +108,7 @@ Homepage
     />
    </div>
     <div class = "container  align-items-center p-4 t-4">
-        <p class = "display-4 m-4">What is UGR 16 ?</p>
+        <p class = "italic_em lead m-4">What is the UGR 16 dataset ?</p>
         <p class = "m-4">
        		UGR 16 is a Netflow dataset for the evaluation of cyclostationarity-based network IDSs. The dataset is built with real traffic and up-to-date attacks. 
 		These data come from several netflow v9 collectors strategically located in the network of a Spanish ISP. It is composed of two differentiated sets of data that are previously split in weeks:
@@ -93,12 +117,12 @@ Homepage
 		<li><p class = "m-4">A CALIBRATION set of data gathered from March to June of 2016 (4 months) containing real background traffic data. </p> </li>
 		<li><p class = "m-4">A TEST set of data gathered from July to August of 2016 containing real background and synthetically generated traffic data that corresponds with several and well know types of attacks. </p></li>  
 	</ul>		
-	<p class = "display-4 m-4">What is cyclostationarity ?</p>
+	<p class = "italic_em lead m-4">What is cyclostationarity ?</p>
         <p class = "m-4">
        		A cyclostationary process is a signal having statistical properties that vary cyclically with time, so it can also be viewed as multiple interleaved stationary processes. 
 		Network traffic presents short-term with long-term temporal behaviors, and this fact has been traditionally leveraged for network design and performance evaluation aims. 
 	</p>
-	<p class = "display-4 m-4">Why is cyclostationarity important ?</p>
+	<p class = "italic_em lead m-4">Why is cyclostationarity important ?</p>
 	    <p class = "m-4">
 		Considering two different simple approaches based on the observation of the network volume traffic, we define thresholds (red dashed lines) as below.
 		If traffic volume exceeds the range, an anomaly is signaled. Stationary approach computes fixed threshold values from the statistical variation; 
@@ -107,15 +131,15 @@ Homepage
     </div>
     <div class="container" style="max-width=70%">
     <img
-            class = ".img-fluid"
+            class = "img-fluid"
             src="{{url_for('static', filename='cyclostationarity.png')}}" align="middle"
     />
    </div>
-   <div class = "container  align-items-center p-4 t-4">
+   <div class = "container align-items-center p-4 t-4">
 	<p class = "m-4">
         	From the figure we can see why cyclostationarity of the network flows is necessary to be considered when building models of network flows, as it can enhance the performance of the models hugely from stationary approach. 
 	</p>
-	<p class = "display-4 m-4">What is the shortcoming of previous works ?</p>
+	<p class = "italic_em lead m-4">What is the shortcoming of previous works ?</p>
 	<p class = "m-4">
 		With the importance of understanding the cyclostationarity highlighted, there are only few works have used this feature for anomaly detection purposes in the security context.
 		There is no publicly available and well described traffic data sets existing where temporal cyclostationarity is captured before UGR 16. 
@@ -123,7 +147,7 @@ Homepage
 		due to the respect of privacy of the mobile users, the data is not publicized. In another study of network flow, the data set used is a 6-week duration traffic trace obtained from a campus university.
 		As in the previous case, it is not publicly available.
 	</p>
-	<p class = "display-4 m-4">What makes UGR 16 special ?</p>
+	<p class = "italic_em lead m-4">What makes UGR 16 special ?</p>
 	<p class = "m-4">
 		The main advantage of this dataset over previous ones is its usefulness for evaluating IDSs that consider long-term evolution and traffic periodicity. 
 		Analysis of cyclostationarity is often limited by the short duration of the traces. Datasets need to span for several cycles of study (days or weeks) to make it possible to evaluate the cyclostationarity. 
