@@ -8,6 +8,8 @@ html_layout = '''
             <title>{%title%}</title>
             {%favicon%}
             <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
             {%css%}
         </head>
      
