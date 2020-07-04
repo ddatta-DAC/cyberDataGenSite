@@ -21,7 +21,7 @@ html_layout = '''
                    <a class="nav-item nav-link h3" href="/home">Home</a>
                 </div>
                 <div  class="d-flex justify-content-end">
-                    <a class="nav-item nav-link h3" href="/dashapp">Visualization Dashboard</a>
+                    <a class="nav-item nav-link h3" href="/dashapp">Visual Analysis</a>
                 </div>
             </div>
             <div class="d-flex ml-auto">

@@ -2,6 +2,7 @@ import sys
 sys.path.append('./../..')
 sys.path.append('./..')
 from flask import current_app as app
+import os
 
 
 @app.route('/')

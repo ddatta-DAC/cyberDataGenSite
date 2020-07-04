@@ -141,7 +141,7 @@ def create_dashboard(server):
 
 def read_data(
         _type = 'background',
-        _size = 1000
+        _size = 100000
 ):
     DATA_LOC = './../data/Processed'
     if type is None:
@@ -464,7 +464,7 @@ def modify_ports(df, port_columns):
 # =======================================
 def get_viz_tab_1(_type='background'):
 
-    data = read_data(_type, _size=100)
+    data = read_data(_type, _size=10000)
     # List to store each Tab specific data in the  Tabs container
     tab_list = []
 
