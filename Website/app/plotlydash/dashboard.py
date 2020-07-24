@@ -256,7 +256,6 @@ def create_data_table(_type):
                 'backgroundColor': 'red',
                 'color': 'white'
             }
-
         ]
     )
     table = html.Div(
@@ -525,6 +524,7 @@ def get_viz_tab_1(_type='background'):
         id="viz_tabs_"+_type,
         className="mx-auto"
     )
+
     tab_container = html.Div(
         [html.Hr(), header, tab_container],
         className="dash_table text-center"

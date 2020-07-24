@@ -13,13 +13,7 @@ def home():
     from .pages import home
     return home.render()
 
-@app.route('/compare')
+@app.route('/generatedData_page')
 def compare_page():
-    from .pages import compare_page
-    return compare_page.render()
-
-
-@app.route('/compare_updateJumbotron', methods=['POST'])
-def compare_updateJumbotron():
-    projectpath = request.form['update_value']
-    return jsonify(status="success")
+    from .pages import generatedData_page
+    return generatedData_page.render()

@@ -6,10 +6,8 @@ html_layout = '''
         <head>
             {%metas%}
             <title>{%title%}</title>
-           
             <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
             {%css%}
         </head>
      
@@ -20,8 +18,8 @@ html_layout = '''
                 <div class="d-flex " >
                    <a class="nav-item nav-link h3" href="/home">Home</a>
                 </div>
-                <div  class="d-flex justify-content-end">
-                    <a class="nav-item nav-link h3" href="/dashapp">Visual Analysis</a>
+                 <div  class="d-flex justify-content-end">
+                     
                 </div>
             </div>
             <div class="d-flex ml-auto">
