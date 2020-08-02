@@ -6,7 +6,7 @@ import sys
 from pandarallel import pandarallel
 from dash.dependencies import Input, Output, State
 import glob
-
+from flask import Flask, send_from_directory
 pandarallel.initialize()
 
 sys.path.append('./../../..')
@@ -19,9 +19,10 @@ import dash_bootstrap_components as dbc
 import dash_html_components as html
 import dash_core_components as dcc
 from .data import create_dataframe
-from .layout import html_layout
+from .dash_G1_layout import html_layout
 import plotly.express as px
 from flask import request
+from urllib.parse import quote as urlquote
 
 try:
     from . import plotly_fig_utils as plotly_utils
@@ -33,7 +34,6 @@ except:
 # Main function
 # =================================
 def create_dashboard(server):
-    """Create a Plotly Dash dashboard."""
     dash_app = dash.Dash(
         server=server,
         routes_pathname_prefix='/dash_board_2/',
@@ -76,6 +76,23 @@ def create_dashboard(server):
         else:
             return build_page(_ip)
 
+    # ======================================================
+    # File download
+    # ======================================================
+    @dash_app.server.route('/download/<path:path>')
+    def download(path):
+        SRC_DIR = './../../data/MainData/Processed/generated'
+        file_path = os.path.join(SRC_DIR, path)
+        print('file >>', file_path, file=sys.stdout)
+
+        from flask import send_file
+
+        return send_file(
+            file_path,
+            mimetype='text/csv',
+            attachment_filename='downloadFile.csv',
+            as_attachment=True
+        )
     return dash_app.server
 
 
@@ -83,9 +100,16 @@ def create_dashboard(server):
 # Main layout creator
 # ==========================
 def build_page(IP):
+
+    title_label = 'Comparison between Real and Generated Data for User IP {}'.format(IP)
+    title_div = html.Div([
+            html.Span(title_label),
+            html.Hr()
+        ],
+        className = 'container-fluid h3 text-center'
+    )
+
     df_r, df_g = read_data(IP)
-
-
     time_series_div_r_P = get_TS_fig(
         figure_id = IP + '_ts_P_' + str(1),
         df = df_r,
@@ -120,16 +144,33 @@ def build_page(IP):
         line_color='blue'
     )
     viz_tab = get_viz_tab(df_r, df_g, IP)
+    download_div = get_download_div(IP)
 
     page_content = html.Div([
-        html.Div('User IP {}'.format(IP)),
+        title_div,
         time_series_div_r_P,
         time_series_div_g_P,
         time_series_div_r_B,
         time_series_div_g_B,
-        viz_tab
+        viz_tab,
+        download_div
+
     ])
     return page_content
+
+
+def get_download_div(IP):
+    f_name = IP + '.csv'
+    _link = get_file_download_link(f_name)
+
+    btn = html.Button(
+        html.A('Download File :: '+ f_name,  href=_link),
+        className='btn btn-outline-primary btn-lg'
+    )
+    return html.Div(
+        [btn],
+        className='container-fluid text-center'
+    )
 
 # ====
 # Auxillary functions
@@ -462,3 +503,10 @@ def get_cat_plot(df, columns):
         legend_orientation="h"
     )
     return fig
+
+
+
+def get_file_download_link(filename):
+    """Create a Plotly Dash 'A' element that downloads a file from the app."""
+    location = "/download/{}".format(urlquote(filename))
+    return location

@@ -17,8 +17,7 @@ import dash_table
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 import dash_core_components as dcc
-from .data import create_dataframe
-from .layout import html_layout
+from .dash_G1_layout import html_layout
 import plotly.express as px
 
 try:
@@ -31,7 +30,6 @@ except:
 # Main function
 # =================================
 def create_dashboard(server):
-    """Create a Plotly Dash dashboard."""
     dash_app = dash.Dash(
         server=server,
         routes_pathname_prefix='/dashapp/',

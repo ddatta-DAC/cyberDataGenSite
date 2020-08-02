@@ -16,10 +16,10 @@ html_layout = '''
         <div class="flex-grow-1 d-flex">
             <div class="d-flex">
                 <div class="d-flex " >
-                   <a class="nav-item nav-link h3" href="/home">Home</a>
+                   <a class="nav-item nav-link h4" href="/home">Home</a>
                 </div>
-                 <div  class="d-flex justify-content-end">
-                     
+                 <div  class="d-flex justify-content-around">
+                    <a class="nav-item nav-link h4" href="/generated_Data"> Generated Data </a>
                 </div>
             </div>
             <div class="d-flex ml-auto">
