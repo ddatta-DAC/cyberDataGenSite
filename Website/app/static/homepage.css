@@ -55,3 +55,14 @@ max-height: 75px;
 	vertical-align: middle;
 	margin-top: -2px;
 }
+.highlight{
+    font-size: 1.2rem;
+    line-height: 2rem;
+    vertical-align: middle;
+    border-radius: 3px;
+    border: solid;
+    border-color: #cad7ff9e
+}
+.btn-1{
+font-size: 2.5rem;
+}

@@ -16,26 +16,9 @@ Homepage
     		/>
 			</div>
 			<div>
-				 <h3 class="display-4 align-items-center">Background</h3>
+				 <h3 class="display-4 align-items-center">Objectives & Research Questions</h3>
 			</div>
 		</div>
-		<p class = "lead h4">What is Cybersecurity?</p>
-        <p class="m-4">
-        	Cybersecurity is the art of protecting networks, devices, and data from unauthorized access or criminal use and the practice of ensuring confidentiality, integrity, and availability of information.
-        </p>
-        <p class = "lead h4">Why is Cybersecurity important?</p>
-        <p class="m-4">
-        	Cybersecurity is a key concern not only for computer scientists, but also for professionals from all relevant disciplines. Lack of cybersecurity can affect businesses, state governments, and even national security.
-		We are enduring the prevalence of cyber-threats and attacks. Cyberattacks are considered a threat against critical infrastructure sectors, and malicious cyber-activity has cost the US economy $57 to $109 billion in 2016.
-        </p>     
-        <p class = "lead h4">What can we do with Machine  Learning for cybersecurity?</p>
-	<p class="m-4">
-		Network traffic content is generated rapidly with tremendous volume, which makes human annotation not possible. A more feasible solution is to develop algorithms to inspect the network traffic. 
-		But there is a concern of violating privacy for organizations to share real-life data for the training of algorithms. Therefore, to achieve training data for classification of network traffic, 
-		we propose to utilize generative models such as GAN for generating synthetic cybersecurity data. 
-	</p>
-
-	<h3 class="display-4 align-items-center">Objectives & Research Questions</h3>
 	<ul>
 		<li><p class = "m-4">
 	      	The core objective is to develop a framework and algorithm that can generate symthetic netflow data that can be utilized in Machine Learning algorithms for cybersecurity.
@@ -82,6 +65,53 @@ Homepage
 
     </div>
 <br>
+<hr>
+    <div class = "container highlight align-items-center p-4 t-4">
+
+	<p class = "m-4">
+	With the proliferation of data driven technology and connectivity, network security has become a key challenge.
+	Cyber attacks have the potential to disrupt business, communication and threaten critical infrastructure.
+	Network Intrusion Detection Systems monitor network flow activity, to determine potential threats.
+	</p>
+
+	<p class = "m-4 h4">
+	How can network data help in building such systems ?
+	</p>
+		<p>
+			Intrusion Detection Systems are predominantly designed as anomaly detection systems.
+			The reason being that "attack" traffic has been observed to have patterns that differ from "normal" or "background" traffic.
+			However such underlying patterns are non trivial, and there are two key aspects to these.
+	<ul>
+		<li>
+		 	Features such as connection duration, protocol, port of communication.
+		</li>
+		<li>
+			Temporal aspect of the traffic
+		</li>
+	</ul>
+	</p><p>
+		It is crucial to understand such patterns, that can help build Intrusion Detection Systems.
+		<u>Visual analytics</u> can provide researchers an overview of network traffic behavior.
+
+	<div class="row justify-space-around">
+		<div class ="col-sm d-flex justify-content-around">
+			<a href="dashapp/">
+				<button class="btn-lg btn-outline-success btn-1"> Real Data
+				</button>
+			</a>
+		</div>
+
+		<div class ="col-sm d-flex justify-content-around ">
+			<a href="generatedData_page">
+				<button class="btn-lg btn-outline-success btn-1">
+					Generated Data
+				</button>
+			</a>
+		</div>
+	</div>
+
+	</p>
+	</div>
 <hr>
 <br>
     <div class = "container  align-items-center p-4 t-4">
@@ -158,7 +188,36 @@ Homepage
 <br>
 <hr>
 <br>
+<div class="faq jumbotron container-fluid flex-wrap align-items-center">
+	<h3>Frequently Asked Questions</h3>
+		<p class = "lead h4">What is Cybersecurity?</p>
+        <p class="m-4">
+        	Cybersecurity is the art of protecting networks, devices, and data from unauthorized access or criminal use and the practice of ensuring confidentiality, integrity, and availability of information.
+        </p>
+        <p class = "lead h4">Why is Cybersecurity important?</p>
+        <p class="m-4">
+        	Cybersecurity is a key concern not only for computer scientists, but also for professionals from all relevant disciplines. Lack of cybersecurity can affect businesses, state governments, and even national security.
+		We are enduring the prevalence of cyber-threats and attacks. Cyberattacks are considered a threat against critical infrastructure sectors, and malicious cyber-activity has cost the US economy $57 to $109 billion in 2016.
+        </p>
+        <p class = "lead h4">What can we do with Machine  Learning for cybersecurity?</p>
+		<p class="m-4">
+		Network traffic content is generated rapidly with tremendous volume, which makes human annotation not possible. A more feasible solution is to develop algorithms to inspect the network traffic.
+		But there is a concern of violating privacy for organizations to share real-life data for the training of algorithms. Therefore, to achieve training data for classification of network traffic,
+		we propose to utilize generative models such as GAN for generating synthetic cybersecurity data.
+	</p>
+		<p class = "lead h4">Where can I obtain the dataset utilized in the research work ?</p>
+        <p class="m-4">
+				<a href="https://nesg.ugr.es/nesg-ugr16/"> UGR-16 Homepage</a>
+		</p>
+		<p class = "lead h4">Where can I obtain the detailed description of the dataset utilized in the research work ?</p>
+        <p class="m-4">
+			<a href="https://www.sciencedirect.com/science/article/pii/S0167404817302353">
+				UGR‘16: A new dataset for the evaluation of cyclostationarity-based network IDSs (Maciá-Fernándeza, Gabriel et.al.)
+			</a>
 
+		</p>
+
+</div>
 <div class = "footer container flex-wrap align-items-center p-4 t-4">
     <div class="row  justify-space-between align-items-center">
         <div class="col">

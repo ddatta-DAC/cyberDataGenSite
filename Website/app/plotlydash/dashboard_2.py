@@ -108,6 +108,19 @@ def build_page(IP):
         ],
         className = 'container-fluid h3 text-center'
     )
+    text = "The temporal component is crucial to discerning nature of traffic data." \
+           " Network traffic is not uniform, but has cycles of higher and lower volumes. " \
+           "The time of the day and week affect the volume. " \
+           "Also normal data, the number of bytes and packets transferred over a time period has cyclical patterns that distinguish it from attacks. " \
+           "For instance spam attacks are concentrated over a relatively short period of time. " \
+           "Other attacks show an increased volume over a relatively longer period than normal traffic."
+
+    ts_text_div = html.Div(
+        [html.H3('Time series analysis'),
+         html.P(text)
+        ],
+        className="conatiner-fluid text-center"
+    )
 
     df_r, df_g = read_data(IP)
     time_series_div_r_P = get_TS_fig(
@@ -146,8 +159,10 @@ def build_page(IP):
     viz_tab = get_viz_tab(df_r, df_g, IP)
     download_div = get_download_div(IP)
 
+
     page_content = html.Div([
         title_div,
+        ts_text_div,
         time_series_div_r_P,
         time_series_div_g_P,
         time_series_div_r_B,
@@ -408,9 +423,14 @@ def get_viz_tab(df_r, df_g ,IP):
     tab_list.append(tab_3)
 
     header_label = ' Data Statistics '
-    header = html.Div(
-        html.P(header_label),
-        className="text-center h3"
+    text = "The distribution of the non-temporal features are also important in understanding patterns of background data." \
+           "Some of the important features are described here. " \
+           "For instance, in normal traffic, some of the most prevalent ports are those pertaining to HTTP/S, Telnet and SSH. " \
+           "Also, the distribution of time duration of connections is different for normal and malicious traffic."
+    header = html.Div([
+        html.P(header_label,  className="text-center h3"),
+        html.P(text)],
+        className="text-center"
     )
 
     tab_container = dcc.Tabs(tab_list)
