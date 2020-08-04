@@ -52,6 +52,12 @@ Note that both the gaussian mixture layers and softmax layers here represents fo
 <br/>
 <br/>
 <h1> Statistics of Generated Data: </h1>
+	<p>  We randomly selected 90 users and generated network flow data for them within the 1-day time span with ANDS model.
+	We expected to see the generated data having the major features comparable with the real data,	so that it can be further used for data analysis and model training purpose. 
+	To ensure the quality of the generated data, we started with verifying the data being reasonable.   
+	The first check we did was the distribution of these users in the generated data as starting addresses and destination addresses.
+	We were expecting a balanced distribution with some variety.
+	</p>  
     <div class="container">
         <div class="col-md-6">
         	<div class="chart" id="graph0" >
@@ -61,10 +67,20 @@ Note that both the gaussian mixture layers and softmax layers here represents fo
     			</script>
 		</div>
 	</div>
-   </div>	  
+    </div>	  
+	<p> As indicated in the plot, the distribution is quite balanced: 
+	The portion of the generated data for which users acted more as starting address over destination address is simialr to the portion of the generated data of the opposite. 
+	We can also see a resonable distribution among them, as the part showing the user having almost same counts as starting address and destination address is more dense than those for parts representing users skewing to starting address or skewing to destination address.   
+	This is a reasonable distribution for starting address and destination address.<br/>
+	</p>
+	
 <br>
 
 <br>
+	<p>Then we reviewed the transport protocol distritbution of netflows for each user. 
+	We expected most generated data would have TCP as the protocol, and the ones with ICMP as the portocol would be very limited in numbers.     
+	We also understood that there should be some variety for the particular distribution among each user's data individually.
+	</p>    
     <div class="container">
         <div class="col-md-6">
         	<div class="chart" id="graph1" >
@@ -74,10 +90,19 @@ Note that both the gaussian mixture layers and softmax layers here represents fo
     			</script>
 		</div>
 	</div>
-   </div>	
+    </div>
+	<p> The result was making sense and also interesting. 
+	There are more data with TCP as the protocol in general. 
+	The users with more TCP as the protocol is domniating. but there is also a few user with more netflow having UDP as the protocol.
+	Which was most intriguing is that there is no data generated with ICMP as the protocol. 
+	This is different from the real data, which has a tiny portion of data with ICMP as the protocol.
+	<br/>
+	</p>   
 <br>
 
-
+<p>Another three distribution of network flows we reviewed is the time duration, bytes transferred and package exchanged for each generated data.
+We grouped data by transport protocol, as we expected to see patterns showing the difference in transport protocol will result in difference in distribution of time duration, bytes transferred and package exchanged.    
+</p>	
 
 <div class="tab">
   <button class="tablinks" onclick="openTab(event, 'td')" id="defaultOpen">Distribution of Time Duration of Flow</button>
@@ -86,6 +111,9 @@ Note that both the gaussian mixture layers and softmax layers here represents fo
 </div>
 
 <div id="td" class="tabcontent">
+	<p> &nbsp; <br/><br/> We exptected to see most of the time duration less than 1 second, while some netflow with TCP protocol may have slightly larger time duration. 
+	Please note as there are a few extreme long time duration, the x-axis of the plot is in the log10 of seconds. 
+	</p>
     <div class="container">
         <div class="col-md-6">
         	<div class="chart" id="graph2" >
@@ -95,10 +123,18 @@ Note that both the gaussian mixture layers and softmax layers here represents fo
     			</script>
 		</div>
 	</div>
-   </div>	
+   </div>
+	<p> As expected, most of the time durations, especially those with UDP protocols, are on the left side of the 0-mark, which represents 1 second in time duration. 
+	We can easily see there is a right tail, especially for netflow with TCP protocol, which means there exists netflow having larger time duration. 
+	This is a reasonable observation, considering the structure of TCP is more complicate than UDP.  
+	<br/><br/></p>	
 </div>
 
 <div id="byt" class="tabcontent">
+	<p> &nbsp; <br/><br/> The distribution of bytes tranferred for each flow can vary hugely. 
+	But in general, as there is less data to transform for UDP protocol compared to TCP protocol, we expected to see the flows with UDP protocol having a relatively smaller average of bytes transferred. 
+	Again, given the bytes transferred can go extraodinary large in bytes, we used log10 of bytes as x-axis. 
+	</p>   
     <div class="container">
         <div class="col-md-6">
         	<div class="chart" id="graph3" >
@@ -108,10 +144,21 @@ Note that both the gaussian mixture layers and softmax layers here represents fo
     			</script>
 		</div>
 	</div>
-   </div>	
+   </div>
+	<p>The distribution of bytes transferred with UDP protocol is actaully quite concentrated: They are mainly within the range of 50 to 100 bytes.
+	The flows of TCP protocol, however, doesn't show a centralized distribution at all. 
+	Their bytes transferred varies mainly from 40 bytes to over 20000 bytes, without a clear pattern in this range.
+	In general, when compared to the flows with TCP protocol, the flows with UDP protocol have less bytes transferred. 
+	The observation is again reasonable. The data transferred with TCP protocol has a more complicated structure, with more fields that uses more bytes. 
+	On the otherside, the complicate structure also allows it transferring more data compared to UDP protocol. 
+	<br/><br/></p> 		
 </div>
 
 <div id="pkt" class="tabcontent">
+	<p> &nbsp; <br/><br/> For most of flows with UDP protocol, there should be only 1 packet to be transferred. 
+	For the flows with TCP protocol, the number of packets to be transferred can vary.
+	Again, we used Log10 of packets transferred to avoid the impact of huge large number of packets.
+	</p>  
     <div class="container">
         <div class="col-md-6">
         	<div class="chart" id="graph4" >
@@ -121,7 +168,11 @@ Note that both the gaussian mixture layers and softmax layers here represents fo
     			</script>
 		</div>
 	</div>
-   </div>	
+   </div>
+	<p>The histogram confirms that most flows of UDP protocol only have 1 packet. 
+	The number of packets of flows of TCP protocols mostly is less than 100. They most frequently have around 10 packets.
+	The distribution again is expected.
+	<br/><br/></p>  	
 </div>
 <hr>
 
