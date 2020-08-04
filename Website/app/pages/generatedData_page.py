@@ -160,7 +160,7 @@ def render():
         reader = csv.reader(f)
         l_td_icmp = next(reader)
     hist_td = create_hist(l_td_tcp, l_td_udp, l_td_icmp,
-                          'Distribution of Time Duration (Stacked Histogram)', 'Time Duration in Log10 of Seconds')
+                          'Distribution of Time Duration (Overlayed Histogram)', 'Time Duration in Log10 of Seconds')
 
 
     with open('./../data/MainData/Processed/summarized/gen_byt_tcp.csv', newline='') as f:
@@ -173,7 +173,7 @@ def render():
         reader = csv.reader(f)
         l_byt_icmp = next(reader)
     hist_byt = create_hist(l_byt_tcp, l_byt_udp, l_byt_icmp,
-                           'Distribution of Bytes Transferred (Stacked Histogram)','Log10 of Bytes')
+                           'Distribution of Bytes Transferred (Overlayed Histogram)','Log10 of Bytes Transferred')
     
     with open('./../data/MainData/Processed/summarized/gen_pkt_tcp.csv', newline='') as f:
         reader = csv.reader(f)
@@ -185,7 +185,7 @@ def render():
         reader = csv.reader(f)
         l_pkt_icmp = next(reader)
     hist_pkt = create_hist(l_pkt_tcp, l_pkt_udp, l_pkt_icmp,
-                           'Distribution of Packets Transferred (Stacked Histogram)','Log10 of Packets')
+                           'Distribution of Packets Transferred (Overlayed Histogram)','Log10 of Packets Transferred')
     
     return render_template('generatedData_page.html', **_dict,
                            plot0=scatter_sa_da,
