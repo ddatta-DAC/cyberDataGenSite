@@ -4,6 +4,9 @@ html_layout = '''
 <!DOCTYPE html>
     <html>
         <head>
+            <link rel="icon" 
+              type="image/png" 
+              href="/static/assets/DAC_logo.png">
             {%metas%}
             <title>{%title%}</title>
             <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
@@ -24,10 +27,10 @@ html_layout = '''
             </div>
             <div class="d-flex ml-auto">
                 <span class="navbar-brand" href="#">
-                    <img src="/static/assets/DAC_logo.png"
+                    <a href="https://dac.cs.vt.edu/"> <img src="/static/assets/DAC_logo.png"
                          width="30" height="30"
                          class="d-inline-block"
-                         alt="Virginia Tech">
+                         alt="Virginia Tech"></a>
                 </span>
             </div>
         </div>

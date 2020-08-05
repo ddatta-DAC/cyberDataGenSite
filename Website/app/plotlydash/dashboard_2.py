@@ -110,10 +110,14 @@ def build_page(IP):
     )
     text = "The temporal component is crucial to discerning nature of traffic data." \
            " Network traffic is not uniform, but has cycles of higher and lower volumes. " \
-           "The time of the day and week affect the volume. " \
-           "Also normal data, the number of bytes and packets transferred over a time period has cyclical patterns that distinguish it from attacks. " \
+           "The time of the day and week has been observed to affect the volume of traffic. " \
+           "Also for normal data," \
+           " the number of bytes and packets transferred over a time period has cyclical patterns." \
+           "Such patterns are different from those of attacks. " \
            "For instance spam attacks are concentrated over a relatively short period of time. " \
-           "Other attacks show an increased volume over a relatively longer period than normal traffic."
+           "Other attacks show an increased volume over a relatively longer period than normal traffic." \
+           "In generating synthetic data that can be utilized for Intrusion Detection Systems," \
+           " such temporal patterns need to be captured."
 
     ts_text_div = html.Div(
         [html.H3('Time series analysis'),
@@ -415,19 +419,20 @@ def get_viz_tab(df_r, df_g ,IP):
         children=[fig_div]
     )
 
-    # tab_list.append(tab_3)
-    # tab_list.append(tab_4)
-    # tab_list.append(tab_5)
+
     tab_list.append(tab_1)
     tab_list.append(tab_2)
     tab_list.append(tab_3)
 
-    header_label = ' Data Statistics '
-    text = "The distribution of the non-temporal features are also important in understanding patterns of background data." \
-           "Some of the important features are described here. " \
-           "For instance, in normal traffic, some of the most prevalent ports are those pertaining to HTTP/S, Telnet and SSH. " \
-           "Also, the distribution of time duration of connections is different for normal and malicious traffic."
+    header_label = 'Data Statistics'
+    text = 'The distribution of the non-temporal features are also important in understanding patterns of background data.' \
+           'Some of the important features are described here.' \
+           'For instance, in normal traffic, some of the most prevalent ports are those pertaining to HTTP/S, Telnet and SSH. ' \
+           'Also, the distribution of time duration of connections is different for normal and malicious traffic.' \
+           'Here we show the comparison between three such key statistics.' \
+           'While anomalies are often indicated by feature combinations, each individual feature is equally important.'
     header = html.Div([
+        html.Br(),
         html.P(header_label,  className="text-center h3"),
         html.P(text)],
         className="text-center"
