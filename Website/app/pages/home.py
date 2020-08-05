@@ -5,7 +5,5 @@ sys.path.append('./../..')
 from flask import render_template
 def render():
     _dict = {
-        'value_1' : 'A',
-        'value_2': 'B'
     }
     return render_template('homepage.html', **_dict)

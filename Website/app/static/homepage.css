@@ -17,9 +17,52 @@ font-size: 1.35rem !important;
 .container p {
 font-size: 1.35rem !important;
 }
+
 .footer{
 font-size: 2.05rem !important;
 }
 .footer_icon{
 max-height: 75px;
+}
+
+.navbar .nav-item i {
+	font-size: 2rem;
+}
+.navbar .dropdown-item i {
+	font-size: 2rem;
+	min-width: 22px;
+}
+.navbar .nav-item.open > a {
+	background: none !important;
+}
+
+.navbar .dropdown-menu {
+	border-color: #e5e5e5;
+	box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+
+.navbar .dropdown-menu a {
+	color: #777;
+	line-height: normal;
+}
+
+.navbar .dropdown-menu a:hover, .navbar .dropdown-menu a:active {
+	color: #333;
+    font-size: 2rem;
+}
+.navbar .dropdown-item .material-icons {
+	line-height: 2rem;
+	vertical-align: middle;
+	margin-top: -2px;
+}
+.highlight{
+    font-size: 1.2rem;
+    line-height: 2rem;
+    vertical-align: middle;
+    border-radius: 3px;
+    border: solid;
+    border-color: #cad7ff9e
+}
+.btn-1{
+font-size: 2.5rem;
 }

@@ -17,8 +17,7 @@ import dash_table
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 import dash_core_components as dcc
-from .data import create_dataframe
-from .layout import html_layout
+from .dash_G1_layout import html_layout
 import plotly.express as px
 
 try:
@@ -31,7 +30,6 @@ except:
 # Main function
 # =================================
 def create_dashboard(server):
-    """Create a Plotly Dash dashboard."""
     dash_app = dash.Dash(
         server=server,
         routes_pathname_prefix='/dashapp/',
@@ -256,7 +254,6 @@ def create_data_table(_type):
                 'backgroundColor': 'red',
                 'color': 'white'
             }
-
         ]
     )
     table = html.Div(
@@ -525,6 +522,7 @@ def get_viz_tab_1(_type='background'):
         id="viz_tabs_"+_type,
         className="mx-auto"
     )
+
     tab_container = html.Div(
         [html.Hr(), header, tab_container],
         className="dash_table text-center"

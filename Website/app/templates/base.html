@@ -2,8 +2,7 @@
 {% block html_attribs %} lang="en"{% endblock %}
 {% block styles %}
 {{super()}}
-<link rel="stylesheet"
-      href="{{url_for('static', filename='bootstrap_lux.min.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='bootstrap_lux.min.css')}}">
 <link rel="stylesheet" href="{{ url_for('static', filename='homepage.css') }}">
 <link rel="shortcut icon" href="{{ url_for('static', filename='/assets/DAC_logo.png') }}">
 
@@ -20,15 +19,23 @@
                    <a class="nav-item nav-link h2" href="/home">Home</a>
                 </div>
                 <div  class="d-flex justify-content-end">
-                    <a class="nav-item nav-link h2" href="/dashapp">Visual Analysis</a>
+                     <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle h2" data-toggle="dropdown">Visual Analysis</a>
+                        <div class="dropdown-menu">
+                            <a href="/dashapp" class="dropdown-item nav-item nav-link h2">Real Data</a>
+                            <a href="/generatedData_page" class="dropdown-item nav-item nav-link h2">Generated Data</a>
+                        </div>
+                     </div>
                 </div>
+
+
             </div>
             <div class="d-flex ml-auto">
                 <span class="navbar-brand" href="#">
-                    <img src="/static/assets/DAC_logo.png"
+                    <a href="https://dac.cs.vt.edu/"><img src="/static/assets/DAC_logo.png"
                          width="30" height="30"
-                         class="d-inline-block"
-                         alt="Virginia Tech">
+                         class="d-inline-block" alt="Virginia Tech">
+                    </a>
                 </span>
             </div>
         </div>
